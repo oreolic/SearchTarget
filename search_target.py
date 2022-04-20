@@ -204,7 +204,7 @@ def search_target_in_same_target(tg):
 
 # %%
 files = os.listdir('EssentialData/hg38')
-df =pd.read_csv('Input/target.txt',sep='\t')
+df =pd.read_csv('Input/input.txt',sep='\t')
 
 print('start',datetime.now())
 merged = []
