@@ -1,8 +1,7 @@
 # SearchTarget
 
 
-find input sgRNA sequence and extract extended sequences from hg38.
-structure of sgRNA should be spacer+PAM sequence
+find perfect match input DNA sequence and extract extended sequences from hg38.
 
 this is multiprocessing (uses 40 cores of CPU) code. 
 
