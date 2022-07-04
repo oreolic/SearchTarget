@@ -4,59 +4,7 @@ from concurrent.futures.process import ProcessPoolExecutor
 from datetime import datetime
 import os
 #%%
-class general:
-    def read_fasta(self,num):
-        total = ''
-        with open('EssentialData/hg38/{}'.format(num) , 'r') as fasta:
-            while True:
-                a = fasta.readline()
-                if not a :
-                    break
-                else:
-                    a  = a.rstrip()
-                    total += a
-
-        return total
-
-    def _fasta38(self,num):
-        total = ''
-        with open('EssentialData/hg38/chr{}.fa'.format(num) , 'r') as fasta:
-            a = fasta.readlines()
-
-            n = 1
-            while n < len(a):
-                eachline = a[n].rstrip()
-                total += eachline
-                n += 1
-
-        return total
-
-    def _fasta19(self,num):
-        total = ''
-        with open('EssentialData/hg19/hg19_{}.fasta'.format(num) , 'r') as fasta:
-            a = fasta.readlines()
-            n = 1
-            while n < len(a):
-                eachline = a[n].rstrip()
-                total += eachline
-                n += 1
-        return total
-
-    def read_fasta(self,acc):
-        hg19 = pd.read_csv('EssentialData/hg19_Accession.txt',sep='\t',index_col=1)
-        hg38 = pd.read_csv('EssentialData/hg38_Accession.txt',sep='\t',index_col=1)
-
-        if acc in list(hg19.index):
-            num = hg19.loc[acc,'Chromosome'].split()[1]        
-            fasta = self._fasta19(num)
-            return fasta
-        elif acc in list(hg38.index):   
-            num = hg38.loc[acc,'Chromosome'].split()[1]           
-            fasta = self._fasta38(num)
-            return fasta
-        else:
-            return 'FALSE'
-        
+class general:        
     def rt(self,seq):
         dic = {'A':'T','G':'C','T':'A','C':'G','a':'t','g':'c','c':'g','t':'a','-':'-','N':'N'}
         rt = ''
@@ -72,18 +20,7 @@ class general:
 def read_fasta(path):
     fa = ''
     with open('EssentialData/hg38/{}'.format(path),'r') as fasta:
-        while True:
-            a = fasta.readline()
-            if not a :
-                break
-            else:
-                a  = a.rstrip()
-                fa += a
-    return fa
-
-def read_fast19(path):
-    fa = ''
-    with open('EssentialData/hg19/hg19_{}.fasta'.format(path),'r') as fasta:
+        first = fasta.readline() ## not included first line
         while True:
             a = fasta.readline()
             if not a :
@@ -121,7 +58,6 @@ def search_target_rp(fa,tg,index):
 
 
 
-# %%
 def search_target_in_same_fasta(fa):
     t1 = datetime.now()
     
